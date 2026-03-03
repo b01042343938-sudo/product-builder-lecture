@@ -1,8 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   updateDate();
   fetchWeather();
   fetchNews();
 });
+
+function initTheme() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  updateThemeIcon(currentTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    updateThemeIcon(theme);
+  });
+}
+
+function updateThemeIcon(theme) {
+  const icon = document.querySelector('#theme-toggle i');
+  if (theme === 'dark') {
+    icon.classList.replace('fa-moon', 'fa-sun');
+  } else {
+    icon.classList.replace('fa-sun', 'fa-moon');
+  }
+}
 
 function updateDate() {
   const dateElement = document.getElementById('current-date');
