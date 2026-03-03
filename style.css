@@ -1,1 +1,187 @@
-/* Add styles here */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --bg-color: #f4f7f6;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --light-text: #777;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  color: var(--secondary-color);
+  font-size: 2.5rem;
+  margin-bottom: 5px;
+}
+
+header #current-date {
+  color: var(--light-text);
+  font-weight: 500;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+section h2 {
+  margin-bottom: 20px;
+  border-left: 5px solid var(--primary-color);
+  padding-left: 15px;
+  color: var(--secondary-color);
+}
+
+/* Weather Grid */
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.weather-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+}
+
+.weather-card.today {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.weather-card.today .date, .weather-card.today .temp-range {
+  color: #e0e0e0;
+}
+
+.weather-card .date {
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.weather-card i {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.weather-card .temp-max {
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: block;
+}
+
+.weather-card .temp-range {
+  font-size: 0.8rem;
+  color: var(--light-text);
+}
+
+/* News List */
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.news-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.news-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.news-content h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+}
+
+.news-content h3 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.news-content h3 a:hover {
+  color: var(--primary-color);
+}
+
+.news-content p {
+  font-size: 0.9rem;
+  color: var(--light-text);
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-meta {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+footer {
+  text-align: center;
+  margin-top: 60px;
+  padding: 20px;
+  color: var(--light-text);
+  font-size: 0.9rem;
+}
+
+.loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: var(--light-text);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+}

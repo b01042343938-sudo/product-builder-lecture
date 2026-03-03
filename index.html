@@ -1,14 +1,39 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>날씨 & 뉴스 대시보드</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-cloud-sun"></i> 오늘과 소식</h1>
+      <p id="current-date"></p>
+    </header>
+
+    <main>
+      <section class="weather-section">
+        <h2><i class="fas fa-calendar-week"></i> 주간 날씨 (서울)</h2>
+        <div id="weather-container" class="weather-grid">
+          <div class="loading">날씨 정보를 불러오는 중...</div>
+        </div>
+      </section>
+
+      <section class="news-section">
+        <h2><i class="fas fa-newspaper"></i> 주요 뉴스</h2>
+        <div id="news-container" class="news-list">
+          <div class="loading">뉴스 정보를 불러오는 중...</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Weather & News Dashboard. Powered by Open-Meteo & RSS.</p>
+    </footer>
+  </div>
+  <script src="main.js"></script>
 </body>
 </html>
