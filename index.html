@@ -1,83 +1,46 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>날씨 & 뉴스 대시보드</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>프로 당구 챌린지</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="header-top">
-        <h1><i class="fas fa-cloud-sun"></i> 오늘과 소식</h1>
-        <button id="theme-toggle" class="theme-btn" aria-label="테마 변경">
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
-      <p id="current-date"></p>
-    </header>
-
-    <main>
-      <section class="weather-section">
-        <h2><i class="fas fa-calendar-week"></i> 주간 날씨 (서울)</h2>
-        <div id="weather-container" class="weather-grid">
-          <div class="loading">날씨 정보를 불러오는 중...</div>
-        </div>
-      </section>
-
-      <section class="news-section">
-        <h2><i class="fas fa-newspaper"></i> 주요 뉴스</h2>
-        <div id="news-container" class="news-list">
-          <div class="loading">뉴스 정보를 불러오는 중...</div>
-        </div>
-      </section>
-
-      <section class="contact-section">
-        <h2><i class="fas fa-paper-plane"></i> 문의하기</h2>
-        <div class="contact-container">
-          <form action="https://formspree.io/f/mvzbjnaz" method="POST" class="contact-form">
-            <div class="form-group">
-              <label for="email">이메일 주소</label>
-              <input type="email" id="email" name="email" placeholder="example@email.com" required>
+    <div id="game-wrapper">
+        <div id="ui-layer">
+            <div class="stat-box">
+                <span class="label">SCORE</span>
+                <span id="score">0</span>
             </div>
-            <div class="form-group">
-              <label for="message">문의 내용</label>
-              <textarea id="message" name="message" rows="5" placeholder="문의하실 내용을 입력해주세요." required></textarea>
+            <div id="life-container">
+                <div class="heart">♥</div>
+                <div class="heart">♥</div>
+                <div class="heart">♥</div>
             </div>
-            <button type="submit" class="submit-btn">보내기</button>
-          </form>
+            <div class="stat-box">
+                <span class="label">COMBO</span>
+                <span id="combo">x1</span>
+            </div>
         </div>
-      </section>
-      <section class="comments-section">
-        <h2><i class="fas fa-comments"></i> 댓글</h2>
-        <div id="disqus_thread"></div>
-        <script>
-            /**
-            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-            /*
-            var disqus_config = function () {
-            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-            };
-            */
-            (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-            s.src = 'https://productbuilder-erwlk5wb5b.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-      </section>
-    </main>
 
-    <footer>
-      <p>&copy; 2026 Weather & News Dashboard. Powered by Open-Meteo & RSS.</p>
-    </footer>
-  </div>
-  <script src="main.js"></script>
+        <div id="table-container">
+            <canvas id="gameCanvas"></canvas>
+            <!-- 파워 게이지 -->
+            <div id="power-bar-container">
+                <div id="power-bar-fill"></div>
+            </div>
+        </div>
+
+        <div id="overlay" class="hidden">
+            <h1 id="status-text">GAME OVER</h1>
+            <p>Final Score: <span id="final-score">0</span></p>
+            <button id="restart-btn">RESTART</button>
+        </div>
+        
+        <div id="guide-msg">공을 드래그하여 조준하고 쏘세요!</div>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
