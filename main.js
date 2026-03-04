@@ -193,6 +193,47 @@ function initGame() {
     }
 }
 
+// 사운드 엔진 (Web Audio API)
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playHitSound(volume = 0.5) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(800 + Math.random() * 200, audioCtx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.1);
+
+    gainNode.gain.setValueAtTime(volume * 0.3, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.1);
+}
+
+function playPocketSound() {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.type = 'triangle';
+    oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.3);
+
+    gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.3);
+}
+
 function checkPocket(ball) {
     const pockets = [
         {x: 0, y: 0}, {x: WIDTH/2, y: 0}, {x: WIDTH, y: 0},
@@ -205,6 +246,9 @@ function checkPocket(ball) {
             ball.inPocket = true;
             ball.vx = 0;
             ball.vy = 0;
+            
+            // 소리 재생
+            playPocketSound();
             
             if (ball.isCue) {
                 handleFoul();
@@ -279,6 +323,12 @@ function resolveCollision(b1, b2) {
         let vxTotal = vx1 - vx2;
         vx1 = vx2;
         vx2 = vxTotal + vx1;
+
+        // 타격음 재생 (충돌 속도에 비례)
+        const relativeSpeed = Math.abs(vxTotal);
+        if (relativeSpeed > 0.5) {
+            playHitSound(Math.min(relativeSpeed / 10, 1.0));
+        }
 
         const overlap = (BALL_RADIUS * 2 - dist) / 2;
         x1 -= overlap;
