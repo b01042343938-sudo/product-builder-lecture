@@ -1,23 +1,27 @@
 :root {
-    --bg-color: #1a1a2e;
+    --bg-color: #0d1a15; /* 깊은 숲색 - 클래식 당구장 느낌 */
     --table-green: #0a5d3c;
-    --table-border: #3e2723;
-    --accent: #e94560;
+    --table-border: #4d2e26;
+    --accent: #d4af37; /* 골드 포인트 - 고급스러움 */
+    --text-primary: #f8f9fa;
+    --text-secondary: #adb5bd;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border-color: rgba(212, 175, 55, 0.2);
 }
 
 body {
     margin: 0;
-    padding: 20px 0;
+    padding: 0;
     background-color: var(--bg-color);
-    font-family: 'Orbitron', sans-serif;
-    color: white;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
-    user-select: none;
+    line-height: 1.6;
     touch-action: pan-y;
 }
 
@@ -25,116 +29,56 @@ body {
     position: relative;
     width: 95vw;
     max-width: 900px;
+    margin: 40px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 50px;
 }
 
-/* 고품질 콘텐츠 섹션 스타일 */
-#content-container {
-    width: 90%;
-    max-width: 800px;
-    margin-top: 40px;
-    padding-bottom: 50px;
-}
-
-.info-section {
-    margin-bottom: 40px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.info-section h2 {
-    color: #00d2ff;
-    border-bottom: 2px solid #00d2ff;
-    padding-bottom: 10px;
-    margin-top: 0;
-}
-
-.info-card {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 15px;
-    border-radius: 10px;
-    margin: 15px 0;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.tip-card {
-    background: rgba(233, 69, 96, 0.1);
-    padding: 15px;
-    border-radius: 10px;
-    border-left: 4px solid var(--accent);
-}
-
-.tip-card h4 {
-    margin-top: 0;
-    color: var(--accent);
-}
-
-.about-section p {
-    line-height: 1.6;
-    color: #ccc;
-}
-
-#main-footer {
-    text-align: center;
-    padding: 30px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-    font-size: 14px;
-    color: #666;
-}
-
+/* UI 레이어 - 간결하고 전문적인 느낌 */
 #ui-layer {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 0 20px;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
 }
 
 .stat-box {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 5px 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: center;
+    text-align: left;
 }
 
 .stat-box .label {
-    display: block;
-    font-size: 10px;
-    color: #aaa;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
-#score, #combo {
-    font-size: 20px;
-    font-weight: bold;
-    color: #00d2ff;
+#score, #combo, #best-score {
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
 }
 
 #life-container {
     display: flex;
-    gap: 5px;
-    font-size: 24px;
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--accent);
+    gap: 8px;
+    font-size: 18px;
+    color: #e94560;
 }
 
+/* 테이블 컨테이너 - 물리적인 질감 강조 */
 #table-container {
     position: relative;
-    border: 12px solid var(--table-border);
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 50px rgba(0,0,0,0.5);
+    border: 15px solid var(--table-border);
+    border-radius: 8px; /* 너무 둥글지 않게 */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     background-color: var(--table-green);
 }
 
@@ -144,18 +88,17 @@ canvas {
     touch-action: none;
 }
 
-/* 파워 게이지 스타일 */
+/* 파워 게이지 - 세련된 바 형태 */
 #power-bar-container {
     position: absolute;
-    right: -40px;
+    right: -30px;
     top: 50%;
     transform: translateY(-50%);
-    width: 15px;
-    height: 200px;
-    background: #333;
-    border-radius: 10px;
+    width: 6px;
+    height: 150px;
+    background: #1a1a1a;
+    border-radius: 3px;
     overflow: hidden;
-    border: 2px solid #555;
 }
 
 #power-bar-fill {
@@ -163,24 +106,21 @@ canvas {
     bottom: 0;
     width: 100%;
     height: 0%;
-    background: linear-gradient(to top, #27ae60, #f1c40f, #e74c3c);
+    background: var(--accent);
     transition: height 0.1s;
 }
 
+/* 오버레이 - 차분하고 가독성 높은 디자인 */
 #overlay, #clear-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(13, 26, 21, 0.95);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 100;
-    border-radius: 10px;
-    transition: opacity 0.5s;
+    transition: opacity 0.4s;
 }
 
 #overlay.hidden, #clear-overlay.hidden {
@@ -188,52 +128,140 @@ canvas {
     opacity: 0;
 }
 
-#clear-status-text {
-    font-size: 80px;
-    margin: 0;
-    color: #ffd700; /* Gold */
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
-    letter-spacing: 10px;
+#status-text, #clear-status-text {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--accent);
+    letter-spacing: -1px;
 }
 
-#clear-time-text {
-    font-size: 24px;
-    margin: 10px 0 30px;
-    color: #fff;
+#clear-status-text {
+    font-size: 64px;
 }
 
 .button-group {
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    margin-top: 30px;
 }
 
 #restart-btn, #clear-restart-btn, #exit-btn {
-    padding: 15px 40px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 18px;
-    color: white;
-    border: none;
-    border-radius: 30px;
+    padding: 12px 30px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    border-radius: 4px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s;
 }
 
-#restart-btn, #clear-restart-btn {
+#restart-btn:hover, #clear-restart-btn:hover {
     background: var(--accent);
-    box-shadow: 0 0 20px var(--accent);
+    color: var(--bg-color);
 }
 
 #exit-btn {
-    background: #555;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    border-color: var(--text-secondary);
+    color: var(--text-secondary);
 }
 
-#restart-btn:hover, #clear-restart-btn:hover, #exit-btn:hover {
-    transform: scale(1.05);
+/* 콘텐츠 섹션 - 매거진 스타일 */
+#content-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 80px auto;
+    padding: 0 20px 100px;
+}
+
+.info-section {
+    margin-bottom: 60px;
+}
+
+.info-section h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 4px;
+    border-left: 2px solid var(--accent);
+    margin-bottom: 20px;
+}
+
+.info-card h3 {
+    font-size: 18px;
+    margin-top: 0;
+    color: var(--accent);
+}
+
+.info-card ul {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-secondary);
+}
+
+.info-card li {
+    margin-bottom: 8px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.tip-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.tip-card h4 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: var(--accent);
+}
+
+.tip-card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.about-section p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    text-align: justify;
+}
+
+#main-footer {
+    text-align: center;
+    padding: 60px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 12px;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #guide-msg {
-    margin-top: 15px;
-    font-size: 12px;
-    color: #666;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-style: italic;
 }
