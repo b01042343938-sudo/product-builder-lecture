@@ -4,8 +4,12 @@ const powerFill = document.getElementById('power-bar-fill');
 const scoreEl = document.getElementById('score');
 const comboEl = document.getElementById('combo');
 const overlay = document.getElementById('overlay');
+const clearOverlay = document.getElementById('clear-overlay');
 const finalScoreEl = document.getElementById('final-score');
+const clearTimeEl = document.getElementById('clear-time');
 const restartBtn = document.getElementById('restart-btn');
+const clearRestartBtn = document.getElementById('clear-restart-btn');
+const exitBtn = document.getElementById('exit-btn');
 const hearts = document.querySelectorAll('.heart');
 
 // 환경 설정
@@ -27,7 +31,8 @@ let mouseX, mouseY;
 let score = 0;
 let combo = 1;
 let lives = 3;
-let gameState = 'play'; // 'play', 'moving', 'gameover'
+let gameState = 'play'; // 'play', 'moving', 'gameover', 'clear'
+let startTime;
 
 class Ball {
     constructor(x, y, color, number = 0, isCue = false) {
@@ -171,6 +176,8 @@ function initGame() {
     scoreEl.textContent = '0';
     comboEl.textContent = 'x1';
     overlay.classList.add('hidden');
+    clearOverlay.classList.add('hidden');
+    startTime = Date.now();
     updateHearts();
 
     // 수구 생성
@@ -299,6 +306,17 @@ function gameOver() {
     overlay.classList.remove('hidden');
 }
 
+function gameClear() {
+    gameState = 'clear';
+    const endTime = Date.now();
+    const duration = Math.floor((endTime - startTime) / 1000);
+    const minutes = Math.floor(duration / 60);
+    const seconds = duration % 60;
+    
+    clearTimeEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    clearOverlay.classList.remove('hidden');
+}
+
 function resolveCollision(b1, b2) {
     if (b1.inPocket || b2.inPocket) return;
 
@@ -364,8 +382,9 @@ function gameLoop() {
     const isMoving = balls.some(b => Math.abs(b.vx) > 0.1 || Math.abs(b.vy) > 0.1);
     if (!isMoving && gameState === 'moving') {
         gameState = 'play';
-        if (balls.filter(b => !b.isCue && !b.inPocket).length === 0) {
-            initGame();
+        const remainingBalls = balls.filter(b => !b.isCue && !b.inPocket).length;
+        if (remainingBalls === 0) {
+            gameClear();
         }
     }
 
@@ -455,8 +474,14 @@ window.addEventListener('mousemove', handleMove);
 window.addEventListener('mouseup', handleEnd);
 canvas.addEventListener('touchstart', handleStart);
 window.addEventListener('touchmove', handleMove);
-window.addEventListener('touchend', handleEnd);
+canvas.addEventListener('touchend', handleEnd);
 restartBtn.addEventListener('click', initGame);
+clearRestartBtn.addEventListener('click', initGame);
+exitBtn.addEventListener('click', () => {
+    if (confirm('게임을 종료하시겠습니까?')) {
+        window.location.reload(); // 리로드하거나 다른 페이지로 이동
+    }
+});
 
 initGame();
 gameLoop();

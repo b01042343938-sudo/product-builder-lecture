@@ -102,7 +102,7 @@ canvas {
     transition: height 0.1s;
 }
 
-#overlay {
+#overlay, #clear-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -118,25 +118,52 @@ canvas {
     transition: opacity 0.5s;
 }
 
-#overlay.hidden {
+#overlay.hidden, #clear-overlay.hidden {
     display: none;
     opacity: 0;
 }
 
-#restart-btn {
-    margin-top: 20px;
+#clear-status-text {
+    font-size: 80px;
+    margin: 0;
+    color: #ffd700; /* Gold */
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
+    letter-spacing: 10px;
+}
+
+#clear-time-text {
+    font-size: 24px;
+    margin: 10px 0 30px;
+    color: #fff;
+}
+
+.button-group {
+    display: flex;
+    gap: 20px;
+}
+
+#restart-btn, #clear-restart-btn, #exit-btn {
     padding: 15px 40px;
     font-family: 'Orbitron', sans-serif;
     font-size: 18px;
-    background: var(--accent);
     color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#restart-btn, #clear-restart-btn {
+    background: var(--accent);
     box-shadow: 0 0 20px var(--accent);
 }
 
-#restart-btn:hover {
+#exit-btn {
+    background: #555;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+#restart-btn:hover, #clear-restart-btn:hover, #exit-btn:hover {
     transform: scale(1.05);
 }
 
